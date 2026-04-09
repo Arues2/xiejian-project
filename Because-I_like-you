@@ -24,31 +24,3 @@ public class HeartFrame extends JFrame {
             }
         }).start();
     }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(Color.RED);
-
-        int cx = getWidth() / 2;
-        int cy = getHeight() / 2;
-
-        GeneralPath heart = new GeneralPath();
-        for (double t = 0; t < 2 * Math.PI; t += 0.01) {
-            double x = 16 * Math.pow(Math.sin(t), 3);
-            double y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-            x = cx + x * 10 * scale;
-            y = cy + y * 10 * scale;
-            if (t == 0) heart.moveTo(x, y);
-            else heart.lineTo(x, y);
-        }
-        heart.closePath();
-        g2d.fill(heart);
-    }
-
-    public static void main(String[] args) {
-        new HeartFrame().setVisible(true);
-    }
-}
